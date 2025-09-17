@@ -1,0 +1,21 @@
+﻿,id_visita,usuario,cidade,pagina,data,t.dia_semana,duracao_min
+0,1,Ana Silva,São Paulo,Home,2022-01-15T00:00:00.000,Sábado,15
+1,2,Bruno Souza,Rio de Janeiro,Filmes,2021-08-22T00:00:00.000,Domingo,20
+2,3,Camila Santos,Belo Horizonte,Noticiarios,2020-05-10T00:00:00.000,Domingo,12
+3,4,Daniel Oliveira,Curitiba,Home,2023-02-01T00:00:00.000,Quarta-feira,25
+4,5,Elisa Pereira,Porto Alegre,Filmes,2021-11-18T00:00:00.000,Quinta-feira,18
+5,6,Felipe Lima,Recife,Noticiarios,2019-07-25T00:00:00.000,Quinta-feira,22
+6,7,Gabriela Rocha,Salvador,Home,2022-09-05T00:00:00.000,Segunda-feira,30
+7,8,Hugo Alves,Fortaleza,Filmes,2023-01-20T00:00:00.000,Sexta-feira,16
+8,9,Isabela Costa,Curitiba,Noticiarios,2020-03-14T00:00:00.000,Sábado,19
+9,10,João Martins,São Paulo,Home,2022-06-30T00:00:00.000,Quinta-feira,14
+10,11,Karen Dias,Rio de Janeiro,Filmes,2023-04-12T00:00:00.000,Quarta-feira,28
+11,12,Luis Fernandes,Belo Horizonte,Noticiarios,2019-12-05T00:00:00.000,Quinta-feira,21
+12,13,Mariana Cardoso,Porto Alegre,Home,2021-07-22T00:00:00.000,Quinta-feira,17
+13,14,Nicolas Barros,Salvador,Filmes,2022-02-28T00:00:00.000,Segunda-feira,24
+14,15,Olivia Teixeira,Recife,Noticiarios,2020-08-19T00:00:00.000,Quarta-feira,20
+15,16,Pedro Castro,Fortaleza,Home,2023-03-03T00:00:00.000,Sexta-feira,23
+16,17,Queila Monteiro,São Paulo,Filmes,2021-10-10T00:00:00.000,Domingo,19
+17,18,Rafael Moreira,Rio de Janeiro,Noticiarios,2018-05-27T00:00:00.000,Domingo,26
+18,19,Sofia Nunes,Belo Horizonte,Home,2022-12-15T00:00:00.000,Quinta-feira,15
+19,20,Thiago Rocha,Curitiba,Filmes,2021-09-08T00:00:00.000,Quarta-feira,27
