@@ -5,14 +5,14 @@ import plotly.express as px
 
 # Conexão com o ClickHouse
 client = clickhouse_connect.get_client(
-     host='localhost',
+    host='localhost',
     port=8123,
     username='dashboard',
     password='senha',
     database='data_warehouse'
 )
 
-# Query base para buscar dados
+# Query base para buscar dados, incluindo consumo_horas_mes e qtd_canais_assistidos
 QUERY_BASE = """
 SELECT
     f.id_visita,
@@ -21,6 +21,8 @@ SELECT
     p.descricao AS pagina,
     t.data_assinatura AS data,
     t.dia_semana,
+    t.consumo_horas_mes,
+    t.qtd_canais_assistidos,
     f.duracao AS duracao_min
 FROM
     fato_visita AS f
@@ -43,22 +45,24 @@ st.title('Dashboard de Visitas')
 # Carrega os dados
 df = load_data()
 
+# Sidebar: filtros
 cidades = st.sidebar.multiselect(
     "Cidade", options=sorted(df['cidade'].unique()), default=sorted(df['cidade'].unique()))
 paginas = st.sidebar.multiselect(
     "Página", options=sorted(df['pagina'].unique()), default=sorted(df['pagina'].unique()))
 datas = st.sidebar.date_input(
-    "Data", value=None, min_value=df['data'].min(), max_value=df['data'].max())
+    "Período", value=(df['data'].min(), df['data'].max()), min_value=df['data'].min(), max_value=df['data'].max())
 
+# Filtra os dados
 df_filtrado = df[
-    df['cidade'].isin(cidades)
-    & df['pagina'].isin(paginas)
+    df['cidade'].isin(cidades) &
+    df['pagina'].isin(paginas)
 ]
 
 if datas is not None and len(datas) == 2:
     df_filtrado = df_filtrado[
-        (pd.to_datetime(df_filtrado['data']) >= pd.to_datetime(datas[0]))
-        & (pd.to_datetime(df_filtrado['data']) <= pd.to_datetime(datas[1]))
+        (df_filtrado['data'] >= pd.to_datetime(datas[0])) &
+        (df_filtrado['data'] <= pd.to_datetime(datas[1]))
     ]
 
 # Exibir dados filtrados
@@ -68,13 +72,14 @@ st.dataframe(df_filtrado)
 st.markdown('### Estatísticas resumidas')
 st.write(f"Total de Visitas selecionadas: {len(df_filtrado)}")
 st.write(f"Duração Média das visitas: {df_filtrado['duracao_min'].mean():.1f} minutos")
+st.write(f"Consumo Médio de Horas/Mês: {df_filtrado['consumo_horas_mes'].mean():.1f} horas")
+st.write(f"Média de Canais Assistidos: {df_filtrado['qtd_canais_assistidos'].mean():.1f}")
 
 # Gráfico de visitas por dia
 st.markdown("### Visitas por dia")
 if df_filtrado.empty:
     st.info("Sem dados para os filtros selecionados")
 else:
-    # Agrupa por dia
     daily = df_filtrado.groupby(df_filtrado['data'].dt.date).size()
     fig = px.bar(
         x=daily.index,
